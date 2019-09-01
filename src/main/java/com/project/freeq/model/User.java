@@ -32,5 +32,4 @@ public class User{
 
     @Column
     private Double latitude;
-
 }
