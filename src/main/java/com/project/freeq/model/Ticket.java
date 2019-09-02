@@ -28,9 +28,17 @@ public class Ticket{
     @Column
     private Float priority;
 
-    @Column(name = "first_name")
+    @Column
     private Date start;
 
-    @Column(name = "last_name")
+    @Column
     private Date finish;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "queue_id", insertable = false, updatable = false)
+    private Queue queue;
 }

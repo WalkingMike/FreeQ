@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.Duration;
-import java.util.Timer;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,4 +28,11 @@ public class Queue{
 
     @Column(name = "average_time")
     private Duration averageTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "service_id", insertable = false, updatable = false)
+    private Service service;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "queue")
+    private List<Ticket> tickets;
 }

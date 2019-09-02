@@ -3,6 +3,8 @@ package com.project.freeq.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,8 +30,15 @@ public class Branch{
     private String phone;
 
     @Column
-    private Double longitude;
+    private BigDecimal longitude;
 
     @Column
-    private Double latitude;
+    private BigDecimal latitude;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "partner_id", insertable = false, updatable = false)
+    private Partner partner;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
+    private List<Service> services;
 }

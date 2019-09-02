@@ -3,6 +3,8 @@ package com.project.freeq.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,8 +30,11 @@ public class User{
     private String email;
 
     @Column
-    private Double longitude;
+    private BigDecimal longitude;
 
     @Column
-    private Double latitude;
+    private BigDecimal latitude;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Ticket> tickets;
 }

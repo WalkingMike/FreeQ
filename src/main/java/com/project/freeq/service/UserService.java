@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 
-@Service("userDetailsService")
+@Service("userService")
 @AllArgsConstructor
 public class UserService{
 

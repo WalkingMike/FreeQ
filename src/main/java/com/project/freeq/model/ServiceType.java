@@ -3,6 +3,7 @@ package com.project.freeq.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -12,12 +13,12 @@ public class ServiceType{
     @GeneratedValue
     private Long id;
 
-    @Column(name="parent_id")
-    private Long parentID;
-
     @Column
     private String name;
 
     @Column
     private String description;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "serviceType")
+    private List<Service> services;
 }

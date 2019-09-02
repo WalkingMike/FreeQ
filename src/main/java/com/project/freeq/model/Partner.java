@@ -3,6 +3,7 @@ package com.project.freeq.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -35,4 +36,7 @@ public class Partner{
 
     @Column
     private String tin;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "partner")
+    private List<Branch> branches;
 }
