@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/user/phone/")
-    public @ResponseBody User getUserByLogin(@RequestParam String phone) {
+    public @ResponseBody User getUserByPhone(@RequestParam String phone) {
         return usrService.getUserByPhone(phone);
     }
 
@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/user/remove/phone")
-    public void removeUserByLogin(@RequestParam String phone) {
+    public void removeUserByPhone(@RequestParam String phone) {
         usrService.removeUserByPhone(phone);
     }
 }

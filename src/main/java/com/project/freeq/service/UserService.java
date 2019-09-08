@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -37,12 +36,10 @@ public class UserService{
         userRepo.save(usr);
     }
 
-    @Transactional
     public void removeUser(Long id){
         userRepo.deleteById(id);
     }
 
-    @Transactional
     public void removeUserByPhone(String phone){
         userRepo.deleteByPhone(phone);
     }

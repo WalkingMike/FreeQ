@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "Queue")
 public class Queue{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name="service_id")
@@ -19,9 +19,6 @@ public class Queue{
 
     @Column(name="current_ticket_id")
     private Long currentTicketID;
-
-    @Column(unique = true)
-    private String phone;
 
     @Column(name = "is_active")
     private Boolean isActive;

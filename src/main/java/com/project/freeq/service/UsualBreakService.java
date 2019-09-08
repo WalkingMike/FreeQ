@@ -3,7 +3,7 @@ package com.project.freeq.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service("serviceService")
+@Service("usualBreakService")
 @AllArgsConstructor
-public class ServiceService {
+public class UsualBreakService {
 }

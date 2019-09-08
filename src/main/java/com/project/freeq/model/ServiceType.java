@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "Service_type")
 public class ServiceType{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
