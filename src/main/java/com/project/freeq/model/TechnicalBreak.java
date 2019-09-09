@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "technical_break")
 public class TechnicalBreak {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,6 +20,5 @@ public class TechnicalBreak {
     private Timestamp endTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "service_id")
-    private Service service;
+    private Service serviceId;
 }

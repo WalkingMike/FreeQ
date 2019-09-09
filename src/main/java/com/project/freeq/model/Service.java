@@ -62,14 +62,14 @@ public class Service{
 
     public double getLatitude() {
         if (latitude == null) {
-            latitude = getBranch().getLatitude();
+            latitude = this.getBranch().getLatitude();
         }
         return latitude.doubleValue();
     }
 
     public double getLongitude() {
         if (longitude == null) {
-            longitude = getBranch().getLatitude();
+            longitude = this.getBranch().getLatitude();
         }
         return longitude.doubleValue();
     }

@@ -18,11 +18,11 @@ public class ServiceTypeService {
         return serviceTypeRepo.findAll();
     }
 
-    public void saveSType(ServiceType serviceType){
+    public void saveServiceType(ServiceType serviceType){
         serviceTypeRepo.save(serviceType);
     }
 
-    public void removeSType(Long id){
+    public void removeServiceType(Long id){
         serviceTypeRepo.deleteById(id);
     }
 }

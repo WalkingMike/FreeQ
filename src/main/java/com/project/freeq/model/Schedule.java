@@ -11,11 +11,11 @@ import java.sql.Timestamp;
 @Table(name = "Schedule")
 public class Schedule {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "week_day")
-    @Enumerated
     private WeekDay weekDay;
 
     @Column(name = "begin_time")

@@ -6,12 +6,17 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("ticketService")
 @AllArgsConstructor
 public class TicketService {
-
     @Autowired
     private final TicketRepo ticketRepo;
+
+    public List<Ticket> getAll(){
+        return ticketRepo.findAll();
+    }
 
     public void saveTicket(Ticket ticket){
         ticketRepo.save(ticket);

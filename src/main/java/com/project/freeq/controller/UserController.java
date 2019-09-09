@@ -11,37 +11,37 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private final UserService usrService;
 
-    @GetMapping(value = "/user/getall")
+    @GetMapping(value = "/getall")
     public @ResponseBody List<User> selectAll() {
         return usrService.getAll();
     }
 
-    @GetMapping(value = "/user/id/")
+    @GetMapping(value = "/id/")
     public @ResponseBody User getUserByID(@RequestParam Long id) {
         return usrService.getUserByID(id);
     }
 
-    @GetMapping(value = "/user/phone/")
+    @GetMapping(value = "/phone/")
     public @ResponseBody User getUserByPhone(@RequestParam String phone) {
         return usrService.getUserByPhone(phone);
     }
 
-    @PostMapping(value = "/user/add")
+    @PostMapping(value = "/add")
     public void addUser(@RequestBody User usr) {
         usrService.saveUser(usr);
     }
 
-    @DeleteMapping(value = "/user/remove")
+    @DeleteMapping(value = "/remove")
     public void removeUser(@RequestParam Long id) {
         usrService.removeUser(id);
     }
 
-    @DeleteMapping(value = "/user/remove/phone")
+    @DeleteMapping(value = "/remove/phone")
     public void removeUserByPhone(@RequestParam String phone) {
         usrService.removeUserByPhone(phone);
     }

@@ -29,7 +29,4 @@ public class Queue{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id", insertable = false, updatable = false)
     private Service service;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "queue")
-    private List<Ticket> tickets;
 }

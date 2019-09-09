@@ -20,6 +20,5 @@ public class UsualBreak {
     private Timestamp endTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "service_id")
-    private Service service;
+    private Service serviceId;
 }

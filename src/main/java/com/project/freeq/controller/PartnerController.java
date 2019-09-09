@@ -11,37 +11,37 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/partner")
 public class PartnerController {
     @Autowired
     private final PartnerService prtnService;
 
-    @GetMapping(value = "/Partner/getall")
+    @GetMapping(value = "/getall")
     public @ResponseBody List<Partner> selectAll() {
         return prtnService.getAll();
     }
 
-    @GetMapping(value = "/Partner/id/")
+    @GetMapping(value = "/id/")
     public @ResponseBody Partner getPartnerByID(@RequestParam Long id) {
         return prtnService.getPartnerByID(id);
     }
 
-    @GetMapping(value = "/Partner/phone/")
+    @GetMapping(value = "/phone/")
     public @ResponseBody Partner getPartnerByPhone(@RequestParam String phone) {
         return prtnService.getPartnerByPhone(phone);
     }
 
-    @PostMapping(value = "/Partner/add")
+    @PostMapping(value = "/add")
     public void addPartner(@RequestBody Partner prtn) {
         prtnService.savePartner(prtn);
     }
 
-    @DeleteMapping(value = "/Partner/remove")
+    @DeleteMapping(value = "/remove")
     public void removePartner(@RequestParam Long id) {
         prtnService.removePartner(id);
     }
 
-    @DeleteMapping(value = "/Partner/remove/phone")
+    @DeleteMapping(value = "/remove/phone")
     public void removePartnerByPhone(@RequestParam String phone) {
         prtnService.removePartnerByPhone(phone);
     }
