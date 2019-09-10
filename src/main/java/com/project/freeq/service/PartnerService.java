@@ -30,6 +30,11 @@ public class PartnerService{
         return partner;
     }
 
+    public Partner getPartnerByLogin(String login){
+        Partner partner = partnerRepo.findByLogin(login);
+        return partner;
+    }
+
     public void savePartner(Partner prtn){
         partnerRepo.save(prtn);
     }

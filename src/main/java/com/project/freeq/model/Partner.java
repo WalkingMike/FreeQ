@@ -1,6 +1,7 @@
 package com.project.freeq.model;
 
 import lombok.Data;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Partner")
-public class Partner{
+public class Partner {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
