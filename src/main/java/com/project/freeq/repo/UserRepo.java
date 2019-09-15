@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepo extends JpaRepository<User, Long> {
     User findByPhone(String phone);
+    User findByEmail(String email);
     void deleteByPhone(String phone);
 }

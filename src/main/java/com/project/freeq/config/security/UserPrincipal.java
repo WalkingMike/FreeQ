@@ -4,9 +4,12 @@ import com.project.freeq.model.Partner;
 import com.project.freeq.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,7 +19,11 @@ import java.util.stream.Stream;
 
 @Data
 @AllArgsConstructor
-public class UserPrinciple implements UserDetails {
+public class UserPrincipal implements UserDetails {
+
+    private static String adminLogin = "adminLog";
+
+    private static String adminPassword = "adminPass";
 
     private Long id;
 
@@ -26,12 +33,12 @@ public class UserPrinciple implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public static UserPrinciple build(User user) {
+    public static UserPrincipal build(User user) {
         List<GrantedAuthority> authorities = Stream.of
                 (new SimpleGrantedAuthority(Role.USER.getAuthority()))
                 .collect(Collectors.toList());
 
-        return new UserPrinciple(
+        return new UserPrincipal(
                 user.getId(),
                 user.getPhone(),
                 user.getPassword(),
@@ -39,12 +46,12 @@ public class UserPrinciple implements UserDetails {
         );
     }
 
-    public static UserPrinciple build(Partner partner) {
+    public static UserPrincipal build(Partner partner) {
         List<GrantedAuthority> authorities = Stream.of
                 (new SimpleGrantedAuthority(Role.PARTNER.getAuthority()))
                 .collect(Collectors.toList());
 
-        return new UserPrinciple(
+        return new UserPrincipal(
                 partner.getId(),
                 partner.getLogin(),
                 partner.getPassword(),
@@ -52,15 +59,15 @@ public class UserPrinciple implements UserDetails {
         );
     }
 
-    public static UserPrinciple buildAdmin() {
+    public static UserPrincipal build() {
         List<GrantedAuthority> authorities = Stream.of
                 (new SimpleGrantedAuthority(Role.ADMIN.getAuthority()))
                 .collect(Collectors.toList());
 
-        return new UserPrinciple(
+        return new UserPrincipal(
                 Long.parseLong("-1"),
-                "admin",
-                "admin",
+                adminLogin,
+                (new BCryptPasswordEncoder(16)).encode(adminPassword),
                 authorities
         );
     }
@@ -95,7 +102,7 @@ public class UserPrinciple implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserPrinciple user = (UserPrinciple) o;
+        UserPrincipal user = (UserPrincipal) o;
         return Objects.equals(id, user.id);
     }
 }

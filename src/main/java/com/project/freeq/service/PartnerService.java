@@ -30,6 +30,11 @@ public class PartnerService{
         return partner;
     }
 
+    public Partner getPartnerByEmail(String email){
+        Partner partner = partnerRepo.findByEmail(email);
+        return partner;
+    }
+
     public Partner getPartnerByLogin(String login){
         Partner partner = partnerRepo.findByLogin(login);
         return partner;
