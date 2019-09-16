@@ -4,6 +4,7 @@ import com.project.freeq.model.User;
 import com.project.freeq.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -42,6 +43,7 @@ public class UserController {
         return usrService.getPosition(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @PutMapping(value = "/changeposition")
     public void changePosition (@RequestParam Long id, @RequestParam BigDecimal lon, @RequestParam BigDecimal lat) {
         usrService.changePosition(id, lon, lat);

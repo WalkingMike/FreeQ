@@ -18,9 +18,18 @@ public class TicketController {
     private final TicketService ticketService;
 
     @GetMapping(value = "/getall")
-    public @ResponseBody
-    List<Ticket> selectAll() {
+    public @ResponseBody List<Ticket> selectAll() {
         return ticketService.getAll();
+    }
+
+    @GetMapping(value = "/get/id")
+    public @ResponseBody Ticket getOneById(@RequestParam Long id) {
+        return ticketService.getOneById(id);
+    }
+
+    @GetMapping(value = "/get/queueidandisactive")
+    public @ResponseBody List<Ticket> getAllActiveByQueueId(@RequestParam Long queueId, @RequestParam Boolean isActive) {
+        return ticketService.getAllActiveByQueueId(queueId, isActive);
     }
 
     @PostMapping(value = "/enroll")

@@ -14,10 +14,10 @@ public class Ticket{
     private Long id;
 
     @Column(name="queue_id")
-    private Long queueID;
+    private Long queueId;
 
     @Column(name="user_id")
-    private Long userID;
+    private Long userId;
 
     @Column(name = "is_active")
     private Boolean isActive;
