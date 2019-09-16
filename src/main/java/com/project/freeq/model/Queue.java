@@ -30,6 +30,6 @@ public class Queue{
     @JoinColumn(name = "service_id", insertable = false, updatable = false)
     private Service service;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "queue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets;
 }

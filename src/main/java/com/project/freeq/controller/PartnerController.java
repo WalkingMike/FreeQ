@@ -33,6 +33,7 @@ public class PartnerController {
 
     @PostMapping(value = "/add")
     public void addPartner(@RequestBody Partner prtn) {
+
         prtnService.savePartner(prtn);
     }
 

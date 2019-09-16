@@ -35,6 +35,6 @@ public class User{
     @Column
     private BigDecimal latitude;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets;
 }

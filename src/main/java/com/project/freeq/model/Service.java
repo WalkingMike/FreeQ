@@ -16,9 +16,6 @@ public class Service{
     @Column(name = "branch_id")
     private Long branchID;
 
-    @Column(name = "schedule_id")
-    private Long scheduleID;
-
     @Column(name = "service_type_id")
     private Long serviceTypeID;
 
@@ -39,17 +36,16 @@ public class Service{
     @JoinColumn(name = "service_type_id", insertable = false, updatable = false)
     private ServiceType serviceType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "schedule_id", insertable = false, updatable = false)
-    private Schedule schedule;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Schedule> schedules;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Queue> queues;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UsualBreak> uBreaks;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TechnicalBreak> tBreaks;
 
     public String getPhone() {
