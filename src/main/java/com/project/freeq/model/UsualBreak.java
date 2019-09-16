@@ -19,6 +19,10 @@ public class UsualBreak {
     @Column(name = "end_time")
     private Timestamp endTime;
 
+    @Column(name = "service_id")
+    private Long serviceId;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    private Service serviceId;
+    @JoinColumn(name = "service_id", insertable = false, updatable = false)
+    private Service service;
 }

@@ -39,6 +39,6 @@ public class Branch{
     @JoinColumn(name = "partner_id", insertable = false, updatable = false)
     private Partner partner;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Service> services;
 }

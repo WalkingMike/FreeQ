@@ -1,10 +1,10 @@
 package com.project.freeq.model;
 
 import lombok.Data;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.List;
+
 
 @Data
 @Entity
@@ -38,6 +38,6 @@ public class Partner {
     @Column
     private String tin;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "partner")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Branch> branches;
 }

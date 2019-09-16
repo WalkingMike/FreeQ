@@ -3,7 +3,6 @@ package com.project.freeq.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -18,7 +17,4 @@ public class ServiceType{
 
     @Column
     private String description;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "serviceType")
-    private List<Service> services;
 }
