@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -34,6 +35,16 @@ public class UserController {
     @PostMapping(value = "/add")
     public void addUser(@RequestBody User usr) {
         usrService.saveUser(usr);
+    }
+
+    @GetMapping(value = "/getposition")
+    public @ResponseBody List<BigDecimal> getPosition (@RequestParam Long id) {
+        return usrService.getPosition(id);
+    }
+
+    @PutMapping(value = "/changeposition")
+    public void changePosition (@RequestParam Long id, @RequestParam BigDecimal lon, @RequestParam BigDecimal lat) {
+        usrService.changePosition(id, lon, lat);
     }
 
     @DeleteMapping(value = "/remove")

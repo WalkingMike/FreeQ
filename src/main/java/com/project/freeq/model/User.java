@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @Entity
@@ -34,7 +33,4 @@ public class User{
 
     @Column
     private BigDecimal latitude;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Ticket> tickets;
 }

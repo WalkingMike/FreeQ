@@ -18,6 +18,15 @@ public class TicketService {
         return ticketRepo.findAll();
     }
 
+    public void createTicket(Long user_id, Long queue_id) {
+        Ticket newTicket = new Ticket();
+        newTicket.setIsActive(true);
+        newTicket.setIsReady(true);
+        newTicket.setQueueID(queue_id);
+        newTicket.setUserID(user_id);
+        saveTicket(newTicket);
+    }
+
     public void saveTicket(Ticket ticket){
         ticketRepo.save(ticket);
     }

@@ -6,9 +6,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.EntityNotFoundException;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service("userService")
@@ -20,6 +24,18 @@ public class UserService{
 
     public List<User> getAll(){
         return userRepo.findAll();
+    }
+
+    public List<BigDecimal> getPosition(Long id) {
+        User user = userRepo.findById(id).orElseThrow(EntityNotFoundException::new);
+        return Stream.of(user.getLongitude(), user.getLatitude()).collect(Collectors.toList());
+    }
+
+    public void changePosition(Long id, BigDecimal lon, BigDecimal lat){
+        User user = userRepo.findById(id).orElseThrow(EntityNotFoundException::new);
+        user.setLongitude(lon);
+        user.setLatitude(lat);
+        userRepo.save(user);
     }
 
     public User getUserByID(Long id){

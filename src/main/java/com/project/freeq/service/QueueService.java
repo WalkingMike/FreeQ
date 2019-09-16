@@ -1,6 +1,7 @@
 package com.project.freeq.service;
 
 import com.project.freeq.model.Queue;
+import com.project.freeq.model.Ticket;
 import com.project.freeq.repo.QueueRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

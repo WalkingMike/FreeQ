@@ -23,6 +23,11 @@ public class TicketController {
         return ticketService.getAll();
     }
 
+    @PostMapping(value = "/enroll")
+    public void addQueue(@RequestParam Long user_id, @RequestParam Long queue_id) {
+        ticketService.createTicket(user_id, queue_id);
+    }
+
     @PostMapping(value = "/add")
     public void addTicket(@RequestBody Ticket ticket) {
         ticketService.saveTicket(ticket);

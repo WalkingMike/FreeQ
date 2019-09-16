@@ -2,6 +2,7 @@ package com.project.freeq.controller;
 
 
 import com.project.freeq.model.Queue;
+import com.project.freeq.model.User;
 import com.project.freeq.service.QueueService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class QueueController {
     public void addQueue(@RequestBody Queue queue) {
         queueService.saveQueue(queue);
     }
+
 
     @DeleteMapping(value = "/remove")
     public void removeQueue(@RequestParam Long id) {

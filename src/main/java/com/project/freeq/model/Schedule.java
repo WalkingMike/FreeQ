@@ -23,4 +23,7 @@ public class Schedule {
 
     @Column(name = "end_time")
     private Timestamp endTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Service serviceId;
 }

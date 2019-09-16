@@ -32,12 +32,6 @@ public class Service{
     @Column
     private String phone;
 
-    @Column
-    private BigDecimal longitude;
-
-    @Column
-    private BigDecimal latitude;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id", insertable = false, updatable = false)
     private Branch branch;
@@ -50,27 +44,10 @@ public class Service{
     @JoinColumn(name = "schedule_id", insertable = false, updatable = false)
     private Schedule schedule;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service")
-    private List<Queue> queues;
-
     public String getPhone() {
         if (phone == null) {
             phone = getBranch().getPhone();
         }
         return phone;
-    }
-
-    public double getLatitude() {
-        if (latitude == null) {
-            latitude = this.getBranch().getLatitude();
-        }
-        return latitude.doubleValue();
-    }
-
-    public double getLongitude() {
-        if (longitude == null) {
-            longitude = this.getBranch().getLatitude();
-        }
-        return longitude.doubleValue();
     }
 }
