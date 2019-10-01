@@ -34,7 +34,12 @@ public class TicketController {
 
     @GetMapping(value = "/get/queueid")
     public @ResponseBody List<Ticket> getAllByQueueId(@RequestParam Long queueId) {
-        return ticketService.getAllByQueueId(queueId);
+        return ticketService.getAllActiveByQueueId(queueId, true);
+    }
+
+    @PostMapping(value = "/readiness")
+    public void setReadiness(@RequestParam Long ticketId, @RequestParam Boolean isReady) {
+        ticketService.setIsReady(ticketId, isReady);
     }
 
     @PostMapping(value = "/enroll")

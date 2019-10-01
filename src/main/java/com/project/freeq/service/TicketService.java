@@ -35,6 +35,16 @@ public class TicketService {
         return ticket;
     }
 
+    public Long getCountTicketsInQueue(Long queueId, Boolean active){
+        Long count = ticketRepo.countDistinctByQueueIdAndIsActive(queueId, active);
+        return count;
+    }
+
+    public Ticket getNextTicket(Long queueId){
+        Ticket ticket = ticketRepo.getAllByQueueIdAndIsActiveAndIsReadyOrderByPriorityDesc(queueId, true, true).get(0);
+        return ticket;
+    }
+
     public void setIsReady(Long id, Boolean ready){
         Ticket ticket = ticketRepo.findById(id).orElseThrow(EntityNotFoundException::new);
         if (ticket.getIsActive()) {
@@ -49,18 +59,23 @@ public class TicketService {
         }
     }
 
-    public List<Ticket> getAllByQueueId(Long id){
-        List<Ticket> tickets = ticketRepo.getAllByQueueIdOrderByPriorityDesc(id);
+    public List<Ticket> getAllActiveByQueueId(Long id, Boolean isActive){
+        List<Ticket> tickets = ticketRepo.getAllByQueueIdAndIsActiveOrderByPriorityDesc(id, isActive);
         return tickets;
     }
 
-    public List<Ticket> getAllActiveByQueueId(Long id, Boolean isActive){
-        List<Ticket> tickets = ticketRepo.getAllByQueueIdAndIsActive(id, isActive);
-        return tickets;
+    public void decrementTicketsPriorityInQueue(Long id) {
+        List<Ticket> tickets = ticketRepo.getAllByQueueIdAndIsActiveAndIsReadyOrderByPriorityDesc(id, true, false);
+        for(Ticket ticket : tickets){
+            if (ticket.getPriority() > 1.0){
+                ticket.setPriority(ticket.getPriority() - (float)1);
+            }
+            ticketRepo.save(ticket);
+        }
     }
 
     public void incrementTicketsPriorityInQueue(Long id) {
-        List<Ticket> tickets = ticketRepo.getAllByQueueIdAndIsActive(id, true);
+        List<Ticket> tickets = ticketRepo.getAllByQueueIdAndIsActiveOrderByPriorityDesc(id, true);
         for(Ticket ticket : tickets){
             ticket.setPriority(1 + ticket.getPriority());
             ticketRepo.save(ticket);

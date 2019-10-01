@@ -19,9 +19,19 @@ public class QueueController {
     private final QueueService queueService;
 
     @GetMapping(value = "/getall")
-    public @ResponseBody
-    List<Queue> selectAll() {
+    public @ResponseBody List<Queue> selectAll() {
         return queueService.getAll();
+    }
+
+    @GetMapping(value = "/count")
+    public @ResponseBody Long count(@RequestParam Long id) {
+        return queueService.countTickets(id);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
+    @PostMapping(value = "/advance")
+    public void addQueue(@RequestParam Long id) {
+        queueService.advanceQueue(id);
     }
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
