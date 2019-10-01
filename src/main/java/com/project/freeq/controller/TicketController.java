@@ -32,6 +32,11 @@ public class TicketController {
         return ticketService.getAllActiveByQueueId(queueId, isActive);
     }
 
+    @GetMapping(value = "/get/queueid")
+    public @ResponseBody List<Ticket> getAllByQueueId(@RequestParam Long queueId) {
+        return ticketService.getAllByQueueId(queueId);
+    }
+
     @PostMapping(value = "/enroll")
     public void addQueue(@RequestParam Long user_id, @RequestParam Long queue_id) {
         ticketService.createTicket(user_id, queue_id);

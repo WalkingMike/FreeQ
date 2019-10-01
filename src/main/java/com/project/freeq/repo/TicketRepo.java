@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface TicketRepo extends JpaRepository<Ticket, Long> {
     List<Ticket> getAllByQueueIdAndIsActive(Long queueId, Boolean isActive);
+    List<Ticket> getAllByQueueIdOrderByPriorityDesc(Long queueId);
 }

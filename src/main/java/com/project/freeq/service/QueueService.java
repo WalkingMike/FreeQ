@@ -3,6 +3,7 @@ package com.project.freeq.service;
 import com.project.freeq.model.Queue;
 import com.project.freeq.model.Ticket;
 import com.project.freeq.repo.QueueRepo;
+import com.project.freeq.repo.TicketRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ import java.util.List;
 public class QueueService {
     @Autowired
     private final QueueRepo queueRepo;
+
+    @Autowired
+    private final TicketRepo ticketRepo;
 
     public List<Queue> getAll(){
         return queueRepo.findAll();
