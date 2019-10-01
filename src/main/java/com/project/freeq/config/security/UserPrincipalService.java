@@ -49,9 +49,24 @@ public class UserPrincipalService implements UserDetailsService {
         return user1.equals(user2);
     }
 
-    public Boolean isSameWithTickets(UserPrincipal user1, Long ticketId){
+    public Boolean isSameWithTicket(UserPrincipal user1, Long ticketId){
         Long user2Id = ticketService.getOneById(ticketId).getUserId();
         return isSame(user1, user2Id);
+    }
+
+    //TODO implement
+    public Boolean isSameWithService(UserPrincipal user1, Long ticketId){
+        return false;
+    }
+
+    //TODO implement
+    public Boolean isSameWithQueue(UserPrincipal user1, Long ticketId){
+        return false;
+    }
+
+    //TODO implement
+    public Boolean isSameWithBranch(UserPrincipal user1, Long ticketId){
+        return false;
     }
 
 }

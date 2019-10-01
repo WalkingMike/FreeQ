@@ -43,7 +43,7 @@ public class UserController {
         return usrService.getPosition(id);
     }
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN') or (hasRole('USER') and UserPrincipalDetailsService.isSame(principal, id))")
     @PutMapping(value = "/changeposition")
     public void changePosition (@RequestParam Long id, @RequestParam BigDecimal lon, @RequestParam BigDecimal lat) {
         usrService.changePosition(id, lon, lat);

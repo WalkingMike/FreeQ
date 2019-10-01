@@ -40,8 +40,8 @@ public class TicketController {
         return ticketService.getAllActiveByQueueId(queueId, true);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or UserPrincipalDetailsService.isSameWithTicket(principal, ticketId)")
     @PostMapping(value = "/readiness")
-    @PreAuthorize("hasRole('ADMIN') or UserPrincipalDetailsService.isSameWithTickets(principal, ticketId)")
     public void setReadiness(@RequestParam Long ticketId, @RequestParam Boolean isReady) {
         ticketService.setIsReady(ticketId, isReady);
     }
@@ -56,8 +56,8 @@ public class TicketController {
         ticketService.saveTicket(ticket);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or UserPrincipalDetailsService.isSameWithTicket(principal, id)")
     @DeleteMapping(value = "/remove")
-    @PreAuthorize("hasRole('ADMIN') or UserPrincipalDetailsService.isSameWithTickets(principal, id)")
     public void removeTicket(@RequestParam Long id) {
         ticketService.removeTicket(id);
     }
