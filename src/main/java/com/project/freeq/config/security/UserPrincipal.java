@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 @Data
 @AllArgsConstructor
 public class UserPrincipal implements UserDetails {
+    //TODO create proper admin entities and roles with username and passwords
 
     private static String adminLogin = "adminLog";
 
