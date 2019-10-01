@@ -1,10 +1,12 @@
 package com.project.freeq.controller;
 
 
+import com.project.freeq.config.security.UserPrincipalService;
 import com.project.freeq.model.Ticket;
 import com.project.freeq.service.TicketService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +20,7 @@ public class TicketController {
     private final TicketService ticketService;
 
     @GetMapping(value = "/getall")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
     public @ResponseBody List<Ticket> selectAll() {
         return ticketService.getAll();
     }
@@ -38,6 +41,7 @@ public class TicketController {
     }
 
     @PostMapping(value = "/readiness")
+    @PreAuthorize("hasRole('ADMIN') or UserPrincipalDetailsService.isSameWithTickets(principal, ticketId)")
     public void setReadiness(@RequestParam Long ticketId, @RequestParam Boolean isReady) {
         ticketService.setIsReady(ticketId, isReady);
     }
@@ -53,6 +57,7 @@ public class TicketController {
     }
 
     @DeleteMapping(value = "/remove")
+    @PreAuthorize("hasRole('ADMIN') or UserPrincipalDetailsService.isSameWithTickets(principal, id)")
     public void removeTicket(@RequestParam Long id) {
         ticketService.removeTicket(id);
     }
