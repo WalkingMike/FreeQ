@@ -23,8 +23,6 @@ public class TicketService {
 
     public void createTicket(Long user_id, Long queue_id) {
         Ticket newTicket = new Ticket();
-        newTicket.setIsActive(true);
-        newTicket.setIsReady(true);
         newTicket.setQueueId(queue_id);
         newTicket.setUserId(user_id);
         saveTicket(newTicket);
