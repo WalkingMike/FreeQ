@@ -1,6 +1,7 @@
 package com.project.freeq.model;
 
 import lombok.Data;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,23 +31,13 @@ public class Service{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Branch branch;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_type_id", insertable = false, updatable = false)
     private ServiceType serviceType;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Schedule> schedules;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Queue> queues;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UsualBreak> uBreaks;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TechnicalBreak> tBreaks;
 
     public String getPhone() {
         if (phone == null) {

@@ -1,6 +1,7 @@
 package com.project.freeq.model;
 
 import lombok.Data;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -29,16 +30,14 @@ public class Branch{
     @Column
     private String phone;
 
-    @Column
+    @Column(precision = 10, scale = 6)
     private BigDecimal longitude;
 
-    @Column
+    @Column(precision = 10, scale = 6)
     private BigDecimal latitude;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id", insertable = false, updatable = false)
     private Partner partner;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Service> services;
 }

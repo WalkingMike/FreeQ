@@ -29,8 +29,11 @@ public class TicketService {
     }
 
     public Ticket getOneById(Long id){
-        Ticket ticket = ticketRepo.findById(id).orElseThrow(EntityNotFoundException::new);
-        return ticket;
+        if (null != id) {
+            Ticket ticket = ticketRepo.getOne(id);
+            return ticket;
+        }
+        else return null;
     }
 
     public Long getCountTicketsInQueue(Long queueId, Boolean active){

@@ -1,6 +1,7 @@
 package com.project.freeq.model;
 
 import lombok.Data;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -29,12 +30,9 @@ public class User{
     @Column(unique = true)
     private String email;
 
-    @Column
+    @Column(precision = 10, scale = 6)
     private BigDecimal longitude;
 
-    @Column
+    @Column(precision = 10, scale = 6)
     private BigDecimal latitude;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ticket> tickets;
 }

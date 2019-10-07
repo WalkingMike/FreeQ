@@ -21,6 +21,9 @@ public class QueueService {
     @Autowired
     private final TicketService ticketService;
 
+    @Autowired
+    private final TicketService ticketRepo;
+
     @Transactional
     public void advanceQueue(Long queueId){
         endCurrentTicket(queueId);
@@ -30,9 +33,12 @@ public class QueueService {
     public void endCurrentTicket(Long queueId){
         Queue queue = queueRepo.findById(queueId).orElseThrow(EntityNotFoundException::new);
         Ticket ticket = ticketService.getOneById(queue.getCurrentTicketID());
-        ticket.setFinish(new Date());
-        ticket.setIsActive(false);
-        ticketService.saveTicket(ticket);
+        if (null != ticket) {
+            ticket.setFinish(new Date());
+            ticket.setIsActive(false);
+            ticketRepo.saveTicket(ticket);
+        }
+        else return;
     }
 
     public Long countTickets(Long queueId){
