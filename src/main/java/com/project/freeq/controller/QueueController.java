@@ -41,6 +41,12 @@ public class QueueController {
     }
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
+    @PostMapping(value = "/modify")
+    public void modifyQueue(@RequestBody Queue queue) {
+        queueService.modifyQueue(queue);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
     @DeleteMapping(value = "/remove")
     public void removeQueue(@RequestParam Long id) {
         queueService.removeQueue(id);

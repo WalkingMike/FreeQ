@@ -49,6 +49,12 @@ public class UserController {
         usrService.changePosition(id, lon, lat);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or (hasRole('USER') and UserPrincipalDetailsService.isSame(principal, id))")
+    @PostMapping(value = "/modify")
+    public void modifyUser(@RequestBody User usr) {
+        usrService.modifyUser(usr);
+    }
+
     @DeleteMapping(value = "/remove")
     public void removeUser(@RequestParam Long id) {
         usrService.removeUser(id);

@@ -18,6 +18,13 @@ public class TechnicalBreakService {
         return tBreakRepo.findAll();
     }
 
+    public void modifyTechnicalBreak(TechnicalBreak tBreak){
+        TechnicalBreak modTechnicalBreak = tBreakRepo.getOne(tBreak.getId());
+        if (null != modTechnicalBreak) {
+            tBreakRepo.save(tBreak);
+        }
+    }
+    
     public void saveTechnicalBreak(TechnicalBreak tBreak){
         tBreakRepo.save(tBreak);
     }

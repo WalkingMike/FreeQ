@@ -57,6 +57,13 @@ public class QueueService {
         queueRepo.save(queue);
     }
 
+    public void modifyQueue(Queue q){
+        Queue modQueue = queueRepo.getOne(q.getId());
+        if (null != modQueue) {
+            queueRepo.save(q);
+        }
+    }
+    
     public List<Queue> getAll(){
         return queueRepo.findAll();
     }

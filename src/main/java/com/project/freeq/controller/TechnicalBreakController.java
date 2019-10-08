@@ -31,6 +31,12 @@ public class TechnicalBreakController {
     }
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
+    @PostMapping(value = "/modify")
+    public void modifyTechnicalBreak(@RequestBody TechnicalBreak tBreak) {
+        tBreakService.modifyTechnicalBreak(tBreak);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
     @DeleteMapping(value = "/remove")
     public void removeTechnicalBreak(@RequestParam Long id) {
         tBreakService.removeTechnicalBreak(id);

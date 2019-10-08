@@ -57,6 +57,12 @@ public class TicketController {
     }
 
     @PreAuthorize("hasRole('ADMIN') or UserPrincipalDetailsService.isSameWithTicket(principal, id)")
+    @PostMapping(value = "/modify")
+    public void modifyTicket(@RequestBody Ticket ticket) {
+        ticketService.modifyTicket(ticket);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or UserPrincipalDetailsService.isSameWithTicket(principal, id)")
     @DeleteMapping(value = "/remove")
     public void removeTicket(@RequestParam Long id) {
         ticketService.removeTicket(id);

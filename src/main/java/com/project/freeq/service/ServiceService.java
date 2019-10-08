@@ -17,6 +17,13 @@ public class ServiceService {
         return serviceRepo.findAll();
     }
 
+    public void modifyService(com.project.freeq.model.Service service){
+        com.project.freeq.model.Service modService = serviceRepo.getOne(service.getId());
+        if (null != modService) {
+            serviceRepo.save(service);
+        }
+    }
+    
     public void saveService(com.project.freeq.model.Service service){
         serviceRepo.save(service);
     }

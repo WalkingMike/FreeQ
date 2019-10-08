@@ -18,6 +18,13 @@ public class UsualBreakService {
         return uBreakRepo.findAll();
     }
 
+    public void modifyUsualBreak(UsualBreak uBreak){
+        UsualBreak modUsualBreak = uBreakRepo.getOne(uBreak.getId());
+        if (null != modUsualBreak) {
+            uBreakRepo.save(uBreak);
+        }
+    }
+    
     public void saveUsualBreak(UsualBreak uBreak){
         uBreakRepo.save(uBreak);
     }

@@ -34,10 +34,26 @@ public class Service{
     @JsonIgnore
     private Branch branch;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_type_id", insertable = false, updatable = false)
+    @JsonIgnore
     private ServiceType serviceType;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Schedule> schedules;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Queue> queues;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<UsualBreak> uBreaks;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<TechnicalBreak> tBreaks;
 
     public String getPhone() {
         if (phone == null) {

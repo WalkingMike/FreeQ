@@ -83,6 +83,13 @@ public class TicketService {
         }
     }
 
+    public void modifyTicket(Ticket ticket){
+        Ticket modTicket = ticketRepo.getOne(ticket.getId());
+        if (null != modTicket) {
+            ticketRepo.save(ticket);
+        }
+    }
+    
     @Transactional
     public void saveTicket(Ticket ticket){
         Long queueId = ticket.getQueueId();

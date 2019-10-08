@@ -38,4 +38,8 @@ public class Partner {
 
     @Column
     private String tin;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "partner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Branch> branches;
 }

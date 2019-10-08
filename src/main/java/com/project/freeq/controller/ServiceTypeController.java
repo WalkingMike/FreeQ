@@ -32,6 +32,12 @@ public class ServiceTypeController {
     }
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
+    @PostMapping(value = "/modify")
+    public void modifyService(@RequestBody ServiceType serviceType) {
+        serviceTypeService.modifyServiceType(serviceType);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
     @DeleteMapping(value = "/remove")
     public void removeService(@RequestParam Long id) {
         serviceTypeService.removeServiceType(id);

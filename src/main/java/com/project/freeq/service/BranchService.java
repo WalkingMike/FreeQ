@@ -22,6 +22,13 @@ public class BranchService {
         return branchRepo.findAllByPartnerID(id);
     }
 
+    public void modifyBranch(Branch branch){
+        Branch modBranch = branchRepo.getOne(branch.getId());
+        if (null != modBranch) {
+            branchRepo.save(branch);
+        }
+    }
+
     public void saveBranch(Branch branch){
         branchRepo.save(branch);
     }

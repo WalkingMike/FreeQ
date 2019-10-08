@@ -36,8 +36,12 @@ public class Branch{
     @Column(precision = 10, scale = 6)
     private BigDecimal latitude;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Partner partner;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Service> services;
 }
