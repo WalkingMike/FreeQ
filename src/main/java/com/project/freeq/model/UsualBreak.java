@@ -1,6 +1,7 @@
 package com.project.freeq.model;
 
 import lombok.Data;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -22,6 +23,7 @@ public class UsualBreak {
     @Column(name = "service_id")
     private Long serviceId;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id", insertable = false, updatable = false)
     private Service service;

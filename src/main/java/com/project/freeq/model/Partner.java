@@ -1,6 +1,7 @@
 package com.project.freeq.model;
 
 import lombok.Data;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -39,5 +40,6 @@ public class Partner {
     private String tin;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "partner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Branch> branches;
 }

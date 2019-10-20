@@ -40,6 +40,13 @@ public class PartnerService{
         return partner;
     }
 
+    public void modifyPartner(Partner partner){
+        Partner modPartner = partnerRepo.getOne(partner.getId());
+        if (null != modPartner) {
+            partnerRepo.save(partner);
+        }
+    }
+
     public void savePartner(Partner prtn){
         partnerRepo.save(prtn);
     }

@@ -31,6 +31,12 @@ public class UsualBreakController {
     }
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
+    @PostMapping(value = "/modify")
+    public void modifyUsualBreak(@RequestBody UsualBreak uBreak) {
+        uBreakService.modifyUsualBreak(uBreak);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
     @DeleteMapping(value = "/remove")
     public void removeUsualBreak(@RequestParam Long id) {
         uBreakService.removeUsualBreak(id);

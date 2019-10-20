@@ -19,6 +19,13 @@ public class ScheduleService {
         return scheduleRepo.findAll();
     }
 
+    public void modifySchedule(Schedule schedule){
+        Schedule modSchedule = scheduleRepo.getOne(schedule.getId());
+        if (null != modSchedule) {
+            scheduleRepo.save(schedule);
+        }
+    }
+    
     public void saveSchedule(Schedule schedule){
         scheduleRepo.save(schedule);
     }

@@ -1,10 +1,12 @@
 package com.project.freeq.controller;
 
 
+import com.project.freeq.config.security.UserPrincipalService;
 import com.project.freeq.model.Ticket;
 import com.project.freeq.service.TicketService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +20,7 @@ public class TicketController {
     private final TicketService ticketService;
 
     @GetMapping(value = "/getall")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
     public @ResponseBody List<Ticket> selectAll() {
         return ticketService.getAll();
     }
@@ -34,11 +37,17 @@ public class TicketController {
 
     @GetMapping(value = "/get/queueid")
     public @ResponseBody List<Ticket> getAllByQueueId(@RequestParam Long queueId) {
-        return ticketService.getAllByQueueId(queueId);
+        return ticketService.getAllActiveByQueueId(queueId, true);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or UserPrincipalDetailsService.isSameWithTicket(principal, ticketId)")
+    @PostMapping(value = "/readiness")
+    public void setReadiness(@RequestParam Long ticketId, @RequestParam Boolean isReady) {
+        ticketService.setIsReady(ticketId, isReady);
     }
 
     @PostMapping(value = "/enroll")
-    public void addQueue(@RequestParam Long user_id, @RequestParam Long queue_id) {
+    public void enrollUserInQueue(@RequestParam Long user_id, @RequestParam Long queue_id) {
         ticketService.createTicket(user_id, queue_id);
     }
 
@@ -47,6 +56,13 @@ public class TicketController {
         ticketService.saveTicket(ticket);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or UserPrincipalDetailsService.isSameWithTicket(principal, id)")
+    @PostMapping(value = "/modify")
+    public void modifyTicket(@RequestBody Ticket ticket) {
+        ticketService.modifyTicket(ticket);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or UserPrincipalDetailsService.isSameWithTicket(principal, id)")
     @DeleteMapping(value = "/remove")
     public void removeTicket(@RequestParam Long id) {
         ticketService.removeTicket(id);

@@ -23,15 +23,26 @@ public class TicketService {
 
     public void createTicket(Long user_id, Long queue_id) {
         Ticket newTicket = new Ticket();
-        newTicket.setIsActive(true);
-        newTicket.setIsReady(true);
         newTicket.setQueueId(queue_id);
         newTicket.setUserId(user_id);
         saveTicket(newTicket);
     }
 
     public Ticket getOneById(Long id){
-        Ticket ticket = ticketRepo.findById(id).orElseThrow(EntityNotFoundException::new);
+        if (null != id) {
+            Ticket ticket = ticketRepo.getOne(id);
+            return ticket;
+        }
+        else return null;
+    }
+
+    public Long getCountTicketsInQueue(Long queueId, Boolean active){
+        Long count = ticketRepo.countDistinctByQueueIdAndIsActive(queueId, active);
+        return count;
+    }
+
+    public Ticket getNextTicket(Long queueId){
+        Ticket ticket = ticketRepo.getAllByQueueIdAndIsActiveAndIsReadyOrderByPriorityDesc(queueId, true, true).get(0);
         return ticket;
     }
 
@@ -49,24 +60,36 @@ public class TicketService {
         }
     }
 
-    public List<Ticket> getAllByQueueId(Long id){
-        List<Ticket> tickets = ticketRepo.getAllByQueueIdOrderByPriorityDesc(id);
+    public List<Ticket> getAllActiveByQueueId(Long id, Boolean isActive){
+        List<Ticket> tickets = ticketRepo.getAllByQueueIdAndIsActiveOrderByPriorityDesc(id, isActive);
         return tickets;
     }
 
-    public List<Ticket> getAllActiveByQueueId(Long id, Boolean isActive){
-        List<Ticket> tickets = ticketRepo.getAllByQueueIdAndIsActive(id, isActive);
-        return tickets;
+    public void decrementTicketsPriorityInQueue(Long id) {
+        List<Ticket> tickets = ticketRepo.getAllByQueueIdAndIsActiveAndIsReadyOrderByPriorityDesc(id, true, false);
+        for(Ticket ticket : tickets){
+            if (ticket.getPriority() > 1.0){
+                ticket.setPriority(ticket.getPriority() - (float)1);
+            }
+            ticketRepo.save(ticket);
+        }
     }
 
     public void incrementTicketsPriorityInQueue(Long id) {
-        List<Ticket> tickets = ticketRepo.getAllByQueueIdAndIsActive(id, true);
+        List<Ticket> tickets = ticketRepo.getAllByQueueIdAndIsActiveOrderByPriorityDesc(id, true);
         for(Ticket ticket : tickets){
             ticket.setPriority(1 + ticket.getPriority());
             ticketRepo.save(ticket);
         }
     }
 
+    public void modifyTicket(Ticket ticket){
+        Ticket modTicket = ticketRepo.getOne(ticket.getId());
+        if (null != modTicket) {
+            ticketRepo.save(ticket);
+        }
+    }
+    
     @Transactional
     public void saveTicket(Ticket ticket){
         Long queueId = ticket.getQueueId();

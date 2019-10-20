@@ -41,6 +41,12 @@ public class PartnerController {
         prtnService.savePartner(prtn);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
+    @PostMapping(value = "/modify")
+    public void modifyPartner(@RequestBody Partner prtn) {
+        prtnService.modifyPartner(prtn);
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "/remove")
     public void removePartner(@RequestParam Long id) {

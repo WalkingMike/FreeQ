@@ -31,6 +31,12 @@ public class ScheduleController {
     }
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
+    @PostMapping(value = "/modify")
+    public void modifySchedule(@RequestBody Schedule schedule) {
+        scheduleService.modifySchedule(schedule);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
     @DeleteMapping(value = "/remove")
     public void removeSchedule(@RequestParam Long id) {
         scheduleService.removeSchedule(id);

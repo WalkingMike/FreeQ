@@ -53,6 +53,13 @@ public class UserService{
         return user;
     }
 
+    public void modifyUser(User user){
+        User modUser = userRepo.getOne(user.getId());
+        if (null != modUser) {
+            userRepo.save(user);
+        }
+    }
+    
     public void saveUser(User usr){
         userRepo.save(usr);
     }

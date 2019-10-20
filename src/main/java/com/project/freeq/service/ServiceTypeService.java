@@ -18,6 +18,13 @@ public class ServiceTypeService {
         return serviceTypeRepo.findAll();
     }
 
+    public void modifyServiceType(ServiceType serviceType){
+        ServiceType modServiceType = serviceTypeRepo.getOne(serviceType.getId());
+        if (null != modServiceType) {
+            serviceTypeRepo.save(serviceType);
+        }
+    }
+    
     public void saveServiceType(ServiceType serviceType){
         serviceTypeRepo.save(serviceType);
     }

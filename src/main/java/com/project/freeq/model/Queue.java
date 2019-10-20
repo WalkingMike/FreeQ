@@ -1,6 +1,7 @@
 package com.project.freeq.model;
 
 import lombok.Data;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.Duration;
@@ -28,8 +29,10 @@ public class Queue{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Service service;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "queue", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Ticket> tickets;
 }

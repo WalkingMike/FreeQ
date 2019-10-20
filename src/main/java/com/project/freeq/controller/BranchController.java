@@ -36,6 +36,12 @@ public class BranchController {
     }
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
+    @PostMapping(value = "/modify")
+    public void modifyBranch(@RequestBody Branch branch) {
+        branchService.modifyBranch(branch);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('PARTNER')")
     @DeleteMapping(value = "/remove")
     public void removeBranch(@RequestParam Long id) {
         branchService.removeBranch(id);
